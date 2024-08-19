@@ -1,3 +1,4 @@
+import { logedGuard } from './core/guards/loged.guard';
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
@@ -9,15 +10,16 @@ import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { BrandsComponent } from './components/brands/brands.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-    {path:"",component:AuthLayoutComponent,children:[
+    {path:"",component:AuthLayoutComponent,canActivate:[logedGuard],children:[
         
         {path:"",redirectTo:"login" ,pathMatch:'full'},
         {path:"login",component:LoginComponent,title:"login"},
         {path:"register",component:RegisterComponent,title:"register"}
     ]},
-    {path:"",component:BlankLayoutComponent,children:[
+    {path:"",component:BlankLayoutComponent,canActivate:[authGuard],children:[
         {path:"",redirectTo:"home" ,pathMatch:'full'},
         {path:"home",component:HomeComponent,title:"home"},
         {path:"products",component:ProductComponent,title:"products"},

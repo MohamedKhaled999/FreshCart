@@ -10,6 +10,7 @@ import type { CollapseOptions, CollapseInterface } from 'flowbite';
 import type { InstanceOptions } from 'flowbite';
 import { DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-nav-blank',
@@ -22,16 +23,13 @@ export class NavBlankComponent {
 
  
 
-  private doc=inject(DOCUMENT)
-  constructor(private FlowbiteService: FlowbiteService ) {}
+  // private doc=inject(DOCUMENT)
+  constructor(private flowbiteService: FlowbiteService,readonly _AuthService:AuthService) {}
 
   ngOnInit(): void {
-
-    this.FlowbiteService.loadFlowbite(flowbite => {
-      
-      console.log('Flowbite loaded', flowbite.get())
-
-
+    this.flowbiteService.loadFlowbite(flowbite => {
+      // Your custom code here
+      console.log('Flowbite loaded', flowbite);
     });
   }
 

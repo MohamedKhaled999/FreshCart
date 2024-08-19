@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FlowbiteService } from '../../core/services/flowbite.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-nav-auth',
@@ -10,7 +11,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './nav-auth.component.scss'
 })
 export class NavAuthComponent {
-  constructor(private flowbiteService: FlowbiteService) {}
+  constructor(private flowbiteService: FlowbiteService ) {}
 
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite(flowbite => {
@@ -18,5 +19,7 @@ export class NavAuthComponent {
       console.log('Flowbite loaded', flowbite);
     });
   }
+
+
 
 }

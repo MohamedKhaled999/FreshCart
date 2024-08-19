@@ -2,6 +2,7 @@ import { AuthService } from './../../core/services/auth.service';
 import { NgClass } from '@angular/common';
 import { AbstractType, Component, inject } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, AbstractFormGroupDirective, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { error } from 'console';
 
 @Component({
@@ -23,10 +24,13 @@ export class RegisterComponent {
   },this.confirmPassword)
 
    private _AuthService =inject(AuthService);
+   private _Router =inject(Router);
    errorMeg:string="";
    isLoading:boolean=false;
+   isSuccess:boolean=false;
 
   registerSubmit(){
+   
    
    
   
@@ -36,6 +40,17 @@ export class RegisterComponent {
   subscribe( {next:(data)=>{
   console.log(data)
   this.isLoading =false;
+  
+  if (data.message=='success') {
+    this._Router.navigate(["/login"]) 
+    this.isSuccess=true;
+    setTimeout(()=>{
+      this.isSuccess=false;
+  },2000);
+  }
+
+  // this._Router.navigate(["/login",1000])
+
   },
   error:(err)=>{
     console.log(err.error.message);
@@ -50,6 +65,9 @@ export class RegisterComponent {
   }});
   
 
+   }else{
+    this.registerForm.markAllAsTouched()
+    this.registerForm.setErrors({mismatch:true})
    }
     
   }
