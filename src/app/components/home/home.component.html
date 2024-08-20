@@ -1,9 +1,9 @@
-<section class="my-2">
+<section class="">
   <h2 class="text-main my-3 font-extrabold text-4xl pb-2" >Popular Products:</h2>
   <div class="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-7">
     @for (product of productsList.slice(0,12); track product.id) {
     <div
-      class=" product group "
+      class="product  group  hover:-translate-y-[2%]  "
     >
       <img class=" object-cover" [src]="product.imageCover" alt="product" />
 

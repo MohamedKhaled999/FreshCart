@@ -25,7 +25,7 @@ body{
   .product {
     @apply border-[2px] border-solid border-main rounded-[5px] ;
     
-    transition: box-shadow 0.5s;
+    transition: all 0.5s;
     overflow: hidden;
   }
   
