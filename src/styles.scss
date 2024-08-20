@@ -23,14 +23,14 @@ body{
 
 
   .product {
-    border-radius: 5px;
-    border: solid 1px var(--main-color);
+    @apply border-[2px] border-solid border-main rounded-[5px] ;
+    
     transition: box-shadow 0.5s;
     overflow: hidden;
   }
   
   .product:hover {
-    box-shadow: 0 0 10px #11bd1168;
+    box-shadow: 0 0 13px #11bd1168;
   }
   
   .font-sm {
