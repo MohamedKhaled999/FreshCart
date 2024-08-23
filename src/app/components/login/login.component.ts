@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl, FormControlName, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { log } from 'console';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { log } from 'console';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
 
   loginForm:FormGroup =new FormGroup({
     email:new FormControl(null,[Validators.email,Validators.required]),
@@ -27,6 +28,8 @@ export class LoginComponent {
    
    isSuccess:boolean=false;
 
+   signInSub!:Subscription;
+
   loginSubmit(){
    
    
@@ -34,7 +37,8 @@ export class LoginComponent {
 
    if (this.loginForm.valid) {
     this.isLoading=true;
-    this._AuthService.signIn(this.loginForm.value).
+
+    this.signInSub =this._AuthService.signIn(this.loginForm.value).
   subscribe( {next:(data)=>{
   console.log(data)
   this.isLoading =false;
@@ -66,6 +70,11 @@ export class LoginComponent {
     
   }
 
- 
+ ngOnDestroy(): void {
+  //Called once, before the instance is destroyed.
+  //Add 'implements OnDestroy' to the class.
+  this.signInSub?.unsubscribe();
+ }
+
 
 }

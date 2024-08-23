@@ -13,12 +13,14 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
+
     {path:"",component:AuthLayoutComponent,canActivate:[logedGuard],children:[
         
         {path:"",redirectTo:"login" ,pathMatch:'full'},
         {path:"login",component:LoginComponent,title:"login"},
         {path:"register",component:RegisterComponent,title:"register"}
-    ]},
+    ]}
+    ,
     {path:"",component:BlankLayoutComponent,canActivate:[authGuard],children:[
         {path:"",redirectTo:"home" ,pathMatch:'full'},
         {path:"home",component:HomeComponent,title:"home"},
@@ -27,5 +29,6 @@ export const routes: Routes = [
         {path:"brands",component:BrandsComponent,title:"brands"},
         {path:"categories",component:CategoriesComponent,title:"categories"},
     ]},
-    {path:"**",component:NotfoundComponent}
+    {path:"**",component:NotfoundComponent},
+
 ];
