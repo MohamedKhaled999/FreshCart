@@ -2,14 +2,14 @@ import { Component, inject, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl, FormControlName, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { NgClass } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { log } from 'console';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule,NgClass],
+  imports: [ReactiveFormsModule,NgClass,RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -45,11 +45,12 @@ export class LoginComponent implements OnDestroy {
   if (data.message=='success') {
     localStorage.setItem('userToken',data.token)
     this._AuthService.saveUserData();
-    this._Router.navigate(["/home"]) 
+    
 
     this.isSuccess=true;
     setTimeout(()=>{
       this.isSuccess=false;
+      this._Router.navigate(["/home"]) 
   },2000);
   }
   },

@@ -5,11 +5,12 @@ import { ProductsService } from './../../core/services/products.service';
 import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CategoriesService } from '../../core/services/categories.service';
 import { ICategory } from '../../core/interfaces/icategory';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule],
+  imports: [CarouselModule,RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -30,7 +31,7 @@ mainSliderList:string[] =[
 getAllProductsSub!:Subscription
 getAllCategoriesSub!:Subscription
 
-private readonly _ProductsService =  inject(ProductsService);
+ readonly _ProductsService =  inject(ProductsService);
 private readonly _CategoriesService =  inject(CategoriesService);
 
 
@@ -67,7 +68,7 @@ customOptionsMain: OwlOptions = {
   mouseDrag: true,
   touchDrag: true,
   pullDrag: true,
-  dots: true,
+  dots: false,
   navSpeed: 700,
   autoplay:true,
   autoplayTimeout:5000,
@@ -135,10 +136,5 @@ ngOnInit(): void {
   
  }
 
- getStarFration(num:number):string{
-  let x= (num - Math.floor(num))*100;
-  return `  background-image: linear-gradient(to right, rgb(255, 191, 0) 0%,rgb(255, 191, 0) ${x}%,rgba(255, 191, 0, 0) ${x}%);
-`
-}
 
 }

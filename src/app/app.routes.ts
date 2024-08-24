@@ -11,6 +11,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { BrandsComponent } from './components/brands/brands.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { authGuard } from './core/guards/auth.guard';
+import { DetailsComponent } from './components/details/details.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 export const routes: Routes = [
 
@@ -18,7 +20,9 @@ export const routes: Routes = [
         
         {path:"",redirectTo:"login" ,pathMatch:'full'},
         {path:"login",component:LoginComponent,title:"login"},
-        {path:"register",component:RegisterComponent,title:"register"}
+        {path:"register",component:RegisterComponent,title:"register"},
+        {path:"forgot",component:ForgetPasswordComponent,title:"forgot"},
+
     ]}
     ,
     {path:"",component:BlankLayoutComponent,canActivate:[authGuard],children:[
@@ -28,6 +32,7 @@ export const routes: Routes = [
         {path:"cart",component:CartComponent,title:"cart"},
         {path:"brands",component:BrandsComponent,title:"brands"},
         {path:"categories",component:CategoriesComponent,title:"categories"},
+        {path:"details/:id",component:DetailsComponent,title:"details"},
     ]},
     {path:"**",component:NotfoundComponent},
 

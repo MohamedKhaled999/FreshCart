@@ -11,17 +11,30 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   userData:any=null;
-  constructor(private http:HttpClient ) { }
+  constructor(private _HttpClient:HttpClient ) { }
 
  private readonly _Route =  inject(Router)
 
-  signUp(data:any) : Observable<any>
+  signUp(data:object) : Observable<any>
   {
-    return this.http.post(`${environment.baseUrl}/api/v1/auth/signup`,data)
+    return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/signup`,data)
   }
-  signIn(data:any): Observable<any>
+  signIn(data:object): Observable<any>
   {
-    return this.http.post(`${environment.baseUrl}/api/v1/auth/signin`,data);
+    return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/signin`,data);
+  }
+  setEmailVarfiy(data:object): Observable<any>
+  {
+    return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/forgotPasswords`,data);
+  }
+  setCodeVarfiy(data:object): Observable<any>
+  {
+    return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/verifyResetCode`,data);
+  }
+
+  setResetPassword(data:object): Observable<any>
+  {
+    return this._HttpClient.put(`${environment.baseUrl}/api/v1/auth/resetPassword`,data);
   }
 
   saveUserData():void{
@@ -30,6 +43,8 @@ export class AuthService {
       console.log(this.userData)
     }
   }
+
+
 
   logOut():void{
     localStorage.removeItem('userToken');
