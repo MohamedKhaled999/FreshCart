@@ -45,6 +45,8 @@ verfiyCode:FormGroup = new FormGroup(
       next:(res)=>{
         if (res.statusMsg =='success') {
           this.isSuccess =true;
+
+          this.resetPassword.get('email')?.patchValue(this.verfiyEmail.get('email')?.value)
           
           setTimeout(()=>{
             this.isSuccess=false;

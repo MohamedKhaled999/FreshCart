@@ -6,14 +6,14 @@
 
         @for (img of mainSliderList; track $index) {
           <ng-template carouselSlide >
-            <img class="h-[300px]  object-fill " [src]="img" alt="offer" title="offer">
+            <img class="max-sm:h-[200px] sm:h-[300px]  object-fill " [src]="img" alt="offer" title="offer">
           </ng-template>
         }
         </owl-carousel-o>
     </div>
     <div class=" max-lg:hidden lg:visible lg:w-3/12">
-      <img class="h-[150px]" src="./assets/images/grocery-banner.png" alt="banner">
-      <img class="h-[150px]" src="./assets/images/grocery-banner-2.jpeg" alt="banner">
+      <img class="max-sm:h-[100px] sm:h-[150px]" src="./assets/images/grocery-banner.png" alt="banner">
+      <img class="max-sm:h-[100px] sm:h-[150px]" src="./assets/images/grocery-banner-2.jpeg" alt="banner">
     </div>
   </div>
 </section>
