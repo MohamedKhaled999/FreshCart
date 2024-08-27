@@ -1,5 +1,4 @@
 import { Component, ElementRef, inject, Inject, ViewChild } from '@angular/core';
-import { FlowbiteService } from '../../core/services/flowbite.service';
 
 
 
@@ -11,6 +10,7 @@ import type { InstanceOptions } from 'flowbite';
 import { DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { FlowbiteService } from '../../core/services/flowbite.service';
 
 @Component({
   selector: 'app-nav-blank',

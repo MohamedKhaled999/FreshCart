@@ -34,10 +34,13 @@
 </section>
 
 <!-- Products Section -->
-<section class="">
+<section class="py-3">
+  <div class=" py-3 rounded-lg">
+    <input  class=" p-2 w-1/2 rounded-md mx-auto  block focus:ring-0  outline-none border-0 border-b-2 border-main  focus:border-main" placeholder="Search By Name ..." type="search" name="search" [(ngModel)]="prouductSearch">
+  </div>
   <h2 class="text-main my-3 font-black text-4xl pb-2">Popular Products:</h2>
   <div class="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-7">
-    @for (product of productsList.slice(0,12); track product.id) {
+    @for (product of productsList.slice(0,12) |search:prouductSearch ;track product.id) {
     
       <div class="product group hover:-translate-y-[2%] ">
         <div class=" cursor-pointer" [routerLink]="['/details',product._id]" >
@@ -45,10 +48,10 @@
     
           <div class="p-3">
             <h3 class="text-sm text-main">{{ product.category.name }}</h3>
-            <h4>{{ product.title.split(" ",2).join(" ") }}</h4>
+            <h4>{{ product.title|termText:2}}</h4>
     
             <div class="flex justify-between ">
-              <span class="text-nowrap">{{ product.price }}EGP</span>
+              <span class="text-nowrap">{{ product.price|currency:'GBP' }}</span>
               <div class="flex ">
                 @for (item of [0,0,0,0,0].slice(0,product.ratingsAverage) ; track
                 $index) {
@@ -74,9 +77,9 @@
         </div>
 
         <div
-            class="p-3 group-hover:translate-y-0 translate-y-[120%] transition-all duration-700"
+            class="p-3 group-hover:translate-y-0 translate-y-[150%] transition-all duration-700"
           >
-            <button class="btn-main w-full">Add to Cart</button>
+            <button class="btn-main w-full" (click)="addToCart(product.id)">Add to Cart</button>
           </div>
       </div>
     }

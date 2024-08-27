@@ -6,11 +6,19 @@ import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewCh
 import { CategoriesService } from '../../core/services/categories.service';
 import { ICategory } from '../../core/interfaces/icategory';
 import { RouterLink } from '@angular/router';
+import { CurrencyPipe, DatePipe, JsonPipe, LowerCasePipe, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { TermTextPipe } from '../../core/pipes/term-text.pipe';
+import { SearchPipe } from '../../core/pipes/search.pipe';
+import { FormsModule } from '@angular/forms';
+import { CartService } from '../../core/services/cart.service';
+import { error, log } from 'console';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule,RouterLink],
+  imports: [CarouselModule,RouterLink,FormsModule,
+    UpperCasePipe,LowerCasePipe,TitleCasePipe,SlicePipe,CurrencyPipe, DatePipe,JsonPipe,TermTextPipe,SearchPipe
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -31,8 +39,12 @@ mainSliderList:string[] =[
 getAllProductsSub!:Subscription
 getAllCategoriesSub!:Subscription
 
+prouductSearch:string = "";
+
+
  readonly _ProductsService =  inject(ProductsService);
 private readonly _CategoriesService =  inject(CategoriesService);
+private readonly _CartService =  inject(CartService);
 
 
 customOptionsCategories: OwlOptions = {
@@ -134,6 +146,20 @@ ngOnInit(): void {
   this.getAllProductsSub?.unsubscribe();
   this.getAllCategoriesSub?.unsubscribe();
   
+ }
+ addToCart(id:string){
+  console.log("hi inside");
+  
+this._CartService.addProductToCart(id).subscribe({
+  next:(res)=>{
+    console.log(res);
+    
+  },
+  error:(error)=>{
+    console.log(error);
+    
+  }
+})
  }
 
 

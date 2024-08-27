@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FlowbiteService } from '../../core/services/flowbite.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { FlowbiteService } from '../../core/services/flowbite.service';
 
 @Component({
   selector: 'app-nav-auth',
@@ -11,12 +11,12 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrl: './nav-auth.component.scss'
 })
 export class NavAuthComponent {
-  constructor(private flowbiteService: FlowbiteService ) {}
+  
+  constructor(private _FlowbiteService: FlowbiteService) {}
 
   ngOnInit(): void {
-    this.flowbiteService.loadFlowbite(flowbite => {
-      // Your custom code here
-      console.log('Flowbite loaded', flowbite);
+    this._FlowbiteService.loadFlowbite(flowbite => {    
+      console.log('Flowbite loaded', flowbite);  
     });
   }
 
