@@ -17,8 +17,11 @@ export class OrderService {
   constructor(private readonly _HttpClient:HttpClient) { }
 
   checkOut(data:any,id:string):Observable<any>{
+
+    console.log(window.location.host);
     
-   return this._HttpClient.post(`${environment.baseUrl}/api/v1/orders/checkout-session/${id}?url=http://localhost:4200`,
+    
+   return this._HttpClient.post(`${environment.baseUrl}/api/v1/orders/checkout-session/${id}?url=http://${window.location.host}`,
       {
         "shippingAddress":data
     }
