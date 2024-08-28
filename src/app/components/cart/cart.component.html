@@ -2,12 +2,18 @@
     <h1 class="text-4xl font-extrabold text-center ">
         Shop Cart
     </h1>
-    <p class="text-main font-semibold mb-2">Total Cart Price :{{cartDetails.totalCartPrice|currency:'GBP'}}</p>
+    
+<div class="flex justify-between items-center">
+    <p class="text-main  font-semibold mb-2">Total Cart Price :{{cartDetails.totalCartPrice|currency:'GBP'}}</p>
+    @if (cartDetails.products?.length??0 >0) {
+        <button  (click)="openAlart()" class="p-1 border-main border text-main  rounded-full shadow-me  hover:bg-main hover:text-white transition-all duration-500 active:bg-green-300">Clear All</button>
 
-    @for (item of cartDetails.products; track item.product.id) {
+    }
+</div>
+    @for (item of cartDetails.products??[]; track item.product.id) {
         <div 
         [class.border-b-2]="!$last"
-        class="flex  max-sm:flex-col   gap-4  py-3 ">
+        class="flex  max-sm:flex-col gap-4  py-3 ">
             <div class="md:w-1/12">
                     <div class="">
                         <img class="w-full" [src]="item.product.imageCover" [alt]="item.product.slug">
@@ -49,5 +55,15 @@
             </div>
 
         </div>
+    }
+    @empty {
+        <div class="w-1/2 mx-auto ">
+            <img class="w-full mx-auto" src="./assets/images/emptyCart.svg" alt="emptyCart">
+        </div>
+    }
+
+    @if (cartDetails.products?.length??0 >0) {
+        <button  [routerLink]="['/orders',cartDetails._id]"  class="p-1 border-main border text-main  rounded-full shadow-me  hover:bg-main hover:text-white transition-all duration-500 active:bg-green-300">Order Now</button>
+
     }
 </section>

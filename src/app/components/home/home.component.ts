@@ -12,6 +12,7 @@ import { SearchPipe } from '../../core/pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../core/services/cart.service';
 import { error, log } from 'console';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -45,6 +46,7 @@ prouductSearch:string = "";
  readonly _ProductsService =  inject(ProductsService);
 private readonly _CategoriesService =  inject(CategoriesService);
 private readonly _CartService =  inject(CartService);
+private readonly toastr: ToastrService =inject(ToastrService);
 
 
 customOptionsCategories: OwlOptions = {
@@ -152,6 +154,7 @@ ngOnInit(): void {
   
 this._CartService.addProductToCart(id).subscribe({
   next:(res)=>{
+    this.toastr.success(res.message,'Fresh Cart')
     console.log(res);
     
   },

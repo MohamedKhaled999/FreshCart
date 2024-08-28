@@ -13,6 +13,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { authGuard } from './core/guards/auth.guard';
 import { DetailsComponent } from './components/details/details.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { AllOrdersComponent } from './components/all-orders/all-orders.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 export const routes: Routes = [
 
@@ -33,6 +35,8 @@ export const routes: Routes = [
         {path:"brands",component:BrandsComponent,title:"brands"},
         {path:"categories",component:CategoriesComponent,title:"categories"},
         {path:"details/:id",component:DetailsComponent,title:"details"},
+        {path:"allorders",component:AllOrdersComponent,title:"allorders"},
+        {path:"orders/:id",component:OrdersComponent,title:"orders"},
     ]},
     {path:"**",component:NotfoundComponent},
 
