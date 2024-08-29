@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { CartService } from '../../core/services/cart.service';
 import { error, log } from 'console';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -49,12 +50,14 @@ private readonly _CartService =  inject(CartService);
 private readonly toastr: ToastrService =inject(ToastrService);
 
 
+
 customOptionsCategories: OwlOptions = {
   loop: true,
   mouseDrag: true,
   touchDrag: true,
   pullDrag: true,
   dots: true,
+  rtl:true,
   navSpeed: 500,
   autoplay:true,
   autoplayTimeout:3000,
@@ -82,6 +85,7 @@ customOptionsMain: OwlOptions = {
   mouseDrag: true,
   touchDrag: true,
   pullDrag: true,
+  rtl:true,
   dots: false,
   navSpeed: 700,
   autoplay:true,
@@ -111,6 +115,8 @@ ngOnInit(): void {
     next:(res)=>{
       console.log(res);
     this.categoriesList = res.data;
+    // this.spinner.hide()
+
       
     }
     ,
@@ -135,7 +141,6 @@ ngOnInit(): void {
 })
  
 
-  
  }
 
  ngAfterViewInit(): void {

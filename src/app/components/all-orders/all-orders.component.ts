@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CartService } from '../../core/services/cart.service';
 import { ICart } from '../../core/interfaces/icart';
 import { IOrder } from '../../core/interfaces/iorder';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { OrderService } from '../../core/services/order.service';
 
 @Component({
   selector: 'app-all-orders',
@@ -13,13 +13,13 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 })
 export class AllOrdersComponent implements OnInit{
 
-private readonly _CartService:CartService=inject(CartService)
+private readonly _OrderService:OrderService=inject(OrderService)
 
   orders:IOrder[]=[];
 
 
   ngOnInit(): void {
-    this._CartService.getUserOrders().subscribe({
+    this._OrderService.getUserOrders().subscribe({
       next:(res)=>{
         console.log(res);
         this.orders= res;

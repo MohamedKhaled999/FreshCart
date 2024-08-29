@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class OrderService {
     token:localStorage.getItem('userToken')
   }
 
-  constructor(private readonly _HttpClient:HttpClient) { }
+  constructor(private readonly _HttpClient:HttpClient,private readonly _AuthService:AuthService) { }
 
   checkOut(data:any,id:string):Observable<any>{
 
@@ -28,5 +29,11 @@ export class OrderService {
       ,{
     headers:this.myHeader
     })
+  }
+
+  getUserOrders():Observable<any>{
+    
+    this._AuthService.saveUserData();
+    return this._HttpClient.get(`${environment.baseUrl}/api/v1/orders/user/${this._AuthService.userData.id}`)
   }
 }

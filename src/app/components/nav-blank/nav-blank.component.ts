@@ -11,11 +11,12 @@ import { DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { FlowbiteService } from '../../core/services/flowbite.service';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nav-blank',
   standalone: true,
-  imports: [RouterLink,RouterLinkActive],
+  imports: [RouterLink,RouterLinkActive,TranslateModule],
   templateUrl: './nav-blank.component.html',
   styleUrl: './nav-blank.component.scss'
 })
