@@ -25,7 +25,7 @@ export const appConfig: ApplicationConfig = {
     provideToastr({timeOut:1000,positionClass:'toast-top-right'}),
     importProvidersFrom(NgxSpinnerModule,
       TranslateModule.forRoot({
-        defaultLanguage:'ar',
+        defaultLanguage:'en',
         loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
