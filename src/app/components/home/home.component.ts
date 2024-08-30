@@ -2,7 +2,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Subscription } from 'rxjs';
 import { IProduct } from '../../core/interfaces/iproduct';
 import { ProductsService } from './../../core/services/products.service';
-import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CategoriesService } from '../../core/services/categories.service';
 import { ICategory } from '../../core/interfaces/icategory';
 import { RouterLink } from '@angular/router';
@@ -11,20 +11,21 @@ import { TermTextPipe } from '../../core/pipes/term-text.pipe';
 import { SearchPipe } from '../../core/pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../core/services/cart.service';
-import { error, log } from 'console';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { ProductItemComponent } from '../product-item/product-item.component';
+import { WishListService } from '../../core/services/wish-list.service';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CarouselModule,RouterLink,FormsModule,
-    UpperCasePipe,LowerCasePipe,TitleCasePipe,SlicePipe,CurrencyPipe, DatePipe,JsonPipe,TermTextPipe,SearchPipe
+    UpperCasePipe,LowerCasePipe,TitleCasePipe,SlicePipe,CurrencyPipe, DatePipe,JsonPipe,TermTextPipe,SearchPipe,ProductItemComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit , AfterViewInit ,OnDestroy{
+export class HomeComponent implements OnInit  ,OnDestroy{
 productsList:IProduct[] =[];
 categoriesList:ICategory[] =[];
 mainSliderList:string[] =[
@@ -42,12 +43,15 @@ getAllProductsSub!:Subscription
 getAllCategoriesSub!:Subscription
 
 prouductSearch:string = "";
+wishproductsList:IProduct[] =[];
 
 
- readonly _ProductsService =  inject(ProductsService);
+
+private readonly _ProductsService =  inject(ProductsService);
 private readonly _CategoriesService =  inject(CategoriesService);
-private readonly _CartService =  inject(CartService);
-private readonly toastr: ToastrService =inject(ToastrService);
+private readonly _WishListService: WishListService =inject(WishListService);
+
+
 
 
 
@@ -109,7 +113,26 @@ customOptionsMain: OwlOptions = {
   nav: false
 }
 
+ 
+
+  
+ 
+
+
 ngOnInit(): void {
+
+  this._WishListService.getWish().subscribe({
+    next:(res)=>{
+       console.log(res.data);
+       this.wishproductsList=res.data;
+    
+       
+    },
+    error:(err)=>{
+      console.log(err);
+      
+    }
+  })
 
   this.getAllCategoriesSub = this._CategoriesService.getAllCategories().subscribe({
     next:(res)=>{
@@ -142,33 +165,18 @@ ngOnInit(): void {
  
 
  }
-
- ngAfterViewInit(): void {
-
  
-
- }
  ngOnDestroy(): void {
   
   this.getAllProductsSub?.unsubscribe();
   this.getAllCategoriesSub?.unsubscribe();
   
  }
- addToCart(id:string){
-  console.log("hi inside");
-  
-this._CartService.addProductToCart(id).subscribe({
-  next:(res)=>{
-    this.toastr.success(res.message,'Fresh Cart')
-    console.log(res);
-    
-  },
-  error:(error)=>{
-    console.log(error);
-    
-  }
-})
- }
+ 
 
+ hasHeart(id:string):boolean
+ {
+   return this.wishproductsList.findIndex(x=>x.id == id)>=0;
+ }
 
 }

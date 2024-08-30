@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, Inject, Renderer2, viewChild, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Inject, QueryList, Renderer2, viewChild, ViewChild, ViewChildren, viewChildren } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { FlowbiteService } from '../../core/services/flowbite.service';
@@ -22,11 +22,8 @@ export class NavBlankComponent {
    readonly  _TranslateService:TranslateService =inject(TranslateService);
    private readonly _MytranslateService:MytranslateService =inject(MytranslateService);
 
-  ngOnInit(): void {
-    // ----- >>>>>>> for Now!!!
-    this.currentLang ="en"
-    
-  }
+
+  
 
   show(x:number){
     let ele=null;
@@ -52,6 +49,7 @@ export class NavBlankComponent {
     this.show(0)
     
     this._MytranslateService.changeLang(lang);
+   
 
   }
 

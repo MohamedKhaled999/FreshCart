@@ -5,7 +5,7 @@
       class="flex items-center space-x-3 rtl:space-x-reverse pe-1"
       routerLink="home"
     >
-      <img src="./assets/images/freshcart-logo.svg" class="h-8" alt=" Logo" />
+      <img src="./assets/images/freshcart-logo.svg" class="h-6" alt=" Logo" />
     </a>
 
     
@@ -77,18 +77,18 @@
       </svg>
     </button>
 
-    <div #navshow class="hidden  w-full md:flex md:w-auto transition-all grow max-md:absolute left-0 top-full bg-light"
+    <div #navshow class="hidden   w-full md:flex md:w-auto transition-all grow max-md:absolute left-0 top-full bg-light"
       id="navbar-default"
     >
       <ul
         id="triggerEl"
-        class="font-medium me-auto flex flex-col gap-1 p-4 md:w-fit md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:mt-0 md:border-0"
+        class="font-medium me-auto flex items-center flex-col gap-[2px] p-4 md:w-fit md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:mt-0 md:border-0"
       >
         <li class="m-0">
           <a
             routerLink="home"
             routerLinkActive="active-link"
-            class="block p-1 text-gray-900 rounded"
+            class="block p-1 text-[14px] text-gray-900 rounded"
             >{{"navbar.home" |translate}}</a
           >
         </li>
@@ -96,7 +96,7 @@
           <a
             routerLink="products"
             routerLinkActive="active-link"
-            class="block p-1 text-gray-900 rounded"
+            class="block p-1 text-[14px] text-gray-900 rounded"
             >{{"navbar.products" |translate}}</a
           >
         </li>
@@ -105,7 +105,7 @@
           <a
             routerLink="categories"
             routerLinkActive="active-link"
-            class="block p-1 text-gray-900 rounded"
+            class="block p-1 text-[14px] text-gray-900 rounded"
             >{{"navbar.categories" |translate}}</a
           >
         </li>
@@ -114,7 +114,7 @@
           <a
             routerLink="brands"
             routerLinkActive="active-link"
-            class="block p-1 text-gray-900 rounded"
+            class="block p-1 text-[14px] text-gray-900 rounded"
             >{{"navbar.brands" |translate}}</a
           >
         </li>
@@ -123,14 +123,26 @@
         id="triggerEl"
         class="font-medium ms-auto flex flex-col gap-1 p-4 md:w-fit md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:mt-0 md:border-0"
       >
+
+      <li class="m-0 flex gap-2 items-center">
+        <a
+          routerLink="cart"
+          routerLinkActive="active-link"
+          class="block p-1 text-gray-900 rounded"
+        >
+        <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+        |
+        <a
+        routerLink="wishlist"
+        routerLinkActive="active-link text-main fa-solid"
+        class="block p-1 text-gray-900 rounded"
+      >
+      <i class="fa-regular fa-heart text-[20px] " ></i>
+      </a>
+      </li>
         <li class="m-0 flex gap-2 items-center">
-          <a
-            routerLink="cart"
-            routerLinkActive="active-link"
-            class="block p-1 text-gray-900 rounded"
-          >
-          <i class="fa-solid fa-cart-shopping"></i>
-          </a>
+         
 
           <a class="cursor-pointer block text-gray-900 rounded">
             <i class="fa-brands fa-facebook"></i>
