@@ -66,6 +66,7 @@ export class ProductItemComponent {
     next:(res)=>{
       this.toastr.success(res.message,'Fresh Cart')
       console.log(res);
+      this._CartService.cartCount.next(res.numOfCartItems);
       
     },
     error:(error)=>{

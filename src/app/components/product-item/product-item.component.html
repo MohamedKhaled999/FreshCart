@@ -1,4 +1,4 @@
-<div class="product group hover:-translate-y-[2%]  relative">
+<div class="product h-full group hover:-translate-y-[2%]  relative">
     <span  role="checkbox" class="absolute top-3 end-2 group cursor-pointer ">
       <i (click)="checkHeart($event,product.id)"  [class.fa-solid]="isChecked" class="fa-regular fa-heart text-[25px] text-main transition-all" ></i>
     </span>
@@ -9,9 +9,9 @@
         <h3 class="text-sm text-main">{{ product.category.name }}</h3>
         <h4>{{ product.title|termText:2}}</h4>
 
-        <div class="flex justify-between ">
+        <div class="flex flex-wrap justify-between ">
           <span class="text-nowrap">{{ product.price|currency:'GBP' }}</span>
-          <div class="flex ">
+          <div class="flex  ">
             @for (item of [0,0,0,0,0].slice(0,product.ratingsAverage) ; track
             $index) {
             <span class=" ">

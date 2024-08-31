@@ -6,13 +6,13 @@
     @for (item of wishproductsList??[]; track item.id) {
         <div 
         [class.border-b-2]="!$last"
-        class="flex  max-sm:flex-col gap-4  py-3 ">
-            <div class="md:w-1/12">
+        class="flex flex-col sm:flex-row gap-4  py-3 ">
+            <div class="sm:w-1/12">
                     <div class="">
                         <img class="w-full" [src]="item.imageCover" [alt]="item.slug">
                     </div>                
             </div>
-            <div class="md:w-11/12 items-center flex flex-wrap justify-between">
+            <div class="sm:w-11/12 items-center flex flex-wrap justify-between">
 
                 <div class="flex flex-col gap ">
                     <h3 class="text-lg font-semibold">
