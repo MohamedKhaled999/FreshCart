@@ -1,4 +1,5 @@
-import { Component, ElementRef, inject, Inject, OnInit, QueryList, Renderer2, viewChild, ViewChild, ViewChildren, viewChildren } from '@angular/core';
+import { single } from 'rxjs';
+import { Component, computed, ElementRef, inject, Inject, OnInit, QueryList, Renderer2, Signal, viewChild, ViewChild, ViewChildren, viewChildren } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { FlowbiteService } from '../../core/services/flowbite.service';
@@ -16,7 +17,7 @@ import { CartService } from '../../core/services/cart.service';
 export class NavBlankComponent implements OnInit {
 
  currentLang:string=""
- cartItems:number=0;
+ 
 @ViewChild('navshow') navList!:ElementRef 
 @ViewChild('lang') langList!:ElementRef 
  readonly _AuthService:AuthService =inject(AuthService);
@@ -24,14 +25,14 @@ export class NavBlankComponent implements OnInit {
  private readonly _Renderer2:Renderer2 =inject(Renderer2);
    readonly  _TranslateService:TranslateService =inject(TranslateService);
    private readonly _MytranslateService:MytranslateService =inject(MytranslateService);
-
+   cartItems:Signal<number>=computed(()=> this._CartService.cartCount());
 
   
    ngOnInit(): void {
     this._CartService.getCartProducts().subscribe({
       next:(res:any)=>{
-        console.log(res.data);
-        this._CartService.cartCount.next(res.numOfCartItems)
+        console.log(res);
+        this._CartService.cartCount.set(res.numOfCartItems)
         
       },
       error:(err)=>{
@@ -40,11 +41,9 @@ export class NavBlankComponent implements OnInit {
       }
     })
     
-    this._CartService.cartCount.subscribe({
-      next:(value)=>{
-          this.cartItems=value
-      }
-    })
+    
+
+    
    }
 
   show(x:number){

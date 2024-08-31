@@ -1,4 +1,4 @@
-import { Component, inject, Input, input, OnInit, Renderer2 } from '@angular/core';
+import { Component, inject, Input, input, InputSignal, OnInit, Renderer2 } from '@angular/core';
 import { WishListService } from '../../core/services/wish-list.service';
 import { IProduct } from '../../core/interfaces/iproduct';
 import { ToastrService } from 'ngx-toastr';
@@ -24,7 +24,7 @@ export class ProductItemComponent {
 
 
 
-  @Input() product!:IProduct;
+   product:InputSignal<IProduct>=input.required<IProduct>();
   @Input() isChecked!:boolean;
 
  
@@ -66,7 +66,7 @@ export class ProductItemComponent {
     next:(res)=>{
       this.toastr.success(res.message,'Fresh Cart')
       console.log(res);
-      this._CartService.cartCount.next(res.numOfCartItems);
+      this._CartService.cartCount.set(res.numOfCartItems);
       
     },
     error:(error)=>{

@@ -2,7 +2,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Subscription } from 'rxjs';
 import { IProduct } from '../../core/interfaces/iproduct';
 import { ProductsService } from './../../core/services/products.service';
-import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, Renderer2, ViewChild, signal, WritableSignal } from '@angular/core';
 import { CategoriesService } from '../../core/services/categories.service';
 import { ICategory } from '../../core/interfaces/icategory';
 import { RouterLink } from '@angular/router';
@@ -26,8 +26,10 @@ import { WishListService } from '../../core/services/wish-list.service';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit  ,OnDestroy{
-productsList:IProduct[] =[];
-categoriesList:ICategory[] =[];
+
+productsList:WritableSignal<IProduct[]>=signal<IProduct[]>([]);
+categoriesList:WritableSignal<ICategory[]>=signal<ICategory[]>([]);
+
 mainSliderList:string[] =[
   "./assets/mainSlider/1.avif",
   "./assets/mainSlider/2.avif",
@@ -137,7 +139,7 @@ ngOnInit(): void {
   this.getAllCategoriesSub = this._CategoriesService.getAllCategories().subscribe({
     next:(res)=>{
       console.log(res);
-    this.categoriesList = res.data;
+    this.categoriesList.set( res.data)
     // this.spinner.hide()
 
       
@@ -154,7 +156,7 @@ ngOnInit(): void {
     console.log(res);
     
    
-    this.productsList =res.data;
+    this.productsList.set( res.data)
 
   },
   error:(err)=>{

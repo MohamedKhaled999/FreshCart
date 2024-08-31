@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { environment } from '../environments/environment';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, single } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 })
 export class CartService {
 
-  cartCount:BehaviorSubject<number> = new BehaviorSubject(0);
+  cartCount:WritableSignal<number> = signal(0);
 
   constructor(private readonly _HttpClient:HttpClient , private readonly _AuthService:AuthService) { }
 
