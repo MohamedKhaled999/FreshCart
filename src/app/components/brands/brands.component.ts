@@ -1,29 +1,47 @@
-import { Component,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { BrandService } from '../../core/services/brand.service';
+import { Subscription } from 'rxjs';
+import { ICategory } from '../../core/interfaces/icategory';
 
 @Component({
   selector: 'app-brands',
   standalone: true,
   imports: [],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas:[]
   ,
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.scss'
 })
 export class BrandsComponent {
 
-  mainSliderList:string[] =[
-    "./assets/mainSlider/1.avif",
-    "./assets/mainSlider/2.avif",
-    "./assets/mainSlider/3.avif",
-    "./assets/mainSlider/4.gif",
-    "./assets/mainSlider/5.avif",
-    "./assets/mainSlider/6.avif",
-    "./assets/mainSlider/7.avif",
-    "./assets/mainSlider/8.avif",
-    "./assets/mainSlider/9.avif",
-  ];
+  brandsList:WritableSignal<ICategory[]>=signal<ICategory[]>([]);
+  getAllBrandsSub!:Subscription
 
+  private readonly _BrandService =  inject(BrandService);
+
+  ngOnInit(): void {
+    this.getAllBrandsSub = this._BrandService.getAllBrands().subscribe({
+      next:(res)=>{
+        console.log(res);
+      this.brandsList.set( res.data)
+      // this.spinner.hide()
   
+        
+      }
+      ,
+      error:(err)=>{
+        console.log(err);
+        
+      }
+    })
+  }
+ 
+  ngOnDestroy(): void {
+      this.getAllBrandsSub?.unsubscribe();
+   }
+   
+  
+
 
 
 }
