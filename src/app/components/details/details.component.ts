@@ -32,7 +32,12 @@ export class DetailsComponent implements OnInit {
      this._ProductsServicec.getSpecificProduct(id!).subscribe({next:(res)=>{
         console.log(res.data);
         this.detailsProduct=res.data;
-        this.silder?.slideNext();
+        setTimeout(() => {
+          if (this.silder) {
+            this.silder?.slideNext();
+          }
+        }, 1000);
+        
      },
      error:(err)=>{
       console.log(err);
@@ -50,6 +55,9 @@ export class DetailsComponent implements OnInit {
   getSliderDir() {
 
     console.log("getSliderDir" ,document.body.clientWidth);
+    if (this.silder) {
+      this.silder?.slideNext();
+    }
     
     
     return document.body.clientWidth>=622?'vertical':'horizontal';

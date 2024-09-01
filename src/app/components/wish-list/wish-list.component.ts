@@ -38,7 +38,19 @@ export class WishListComponent implements OnInit {
   removeItem(id:string) {
     this._WishListService.removeFormWish(id).subscribe({next:(res)=>{
       this.toastr.success(res.message,"Fresh Cart")
-      this.wishproductsList = res.data;
+      console.log(res);
+        this._WishListService.getWish().subscribe({
+        next:(res)=>{
+           console.log(res.data);
+           this.wishproductsList=res.data;
+        
+           
+        },
+        error:(err)=>{
+          console.log(err);
+          
+        }
+      })
 
     }})
   }
