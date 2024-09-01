@@ -3,6 +3,7 @@ import { IProduct } from '../../core/interfaces/iproduct';
 import { WishListService } from '../../core/services/wish-list.service';
 import { CurrencyPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-wish-list',
@@ -16,6 +17,7 @@ export class WishListComponent implements OnInit {
 
   private readonly _WishListService: WishListService =inject(WishListService);
   private readonly toastr: ToastrService =inject(ToastrService);
+  private readonly _CartService =  inject(CartService);
 
 
   ngOnInit(): void {
@@ -54,5 +56,22 @@ export class WishListComponent implements OnInit {
 
     }})
   }
+
+
+  addToCart(id:string){
+    console.log("hi inside");
+   this._CartService.addProductToCart(id).subscribe({
+    next:(res)=>{
+      this.toastr.success(res.message,'Fresh Cart')
+      console.log(res);
+      this._CartService.cartCount.set(res.numOfCartItems);
+      
+    },
+    error:(error)=>{
+      console.log(error);
+      
+    }
+   })
+   }
 
 }

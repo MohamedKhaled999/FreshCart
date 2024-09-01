@@ -1,8 +1,10 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../core/services/products.service';
 import { IProduct } from '../../core/interfaces/iproduct';
 import Swiper from 'swiper';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-details',
@@ -17,6 +19,9 @@ export class DetailsComponent implements OnInit {
   
   private readonly _ActivatedRoute= inject(ActivatedRoute)
   readonly _ProductsServicec= inject(ProductsService)
+  readonly _CartService= inject(CartService)
+  private readonly toastr: ToastrService =inject(ToastrService);
+
   detailsProduct:IProduct|null= null
 
   @ViewChild('slider') silder!:Swiper
@@ -54,13 +59,31 @@ export class DetailsComponent implements OnInit {
   }
   getSliderDir() {
 
-    console.log("getSliderDir" ,document.body.clientWidth);
-    if (this.silder) {
-      this.silder?.slideNext();
-    }
-    
-    
+    // console.log("getSliderDir" ,document.body.clientWidth);
+    // if (this.silder) {
+    //   this.silder?.slideNext();
+    // }
+
     return document.body.clientWidth>=622?'vertical':'horizontal';
     }
+
+
+    addToCart(id:string){
+      console.log("hi inside");
+     this._CartService.addProductToCart(id).subscribe({
+      next:(res)=>{
+        this.toastr.success(res.message,'Fresh Cart')
+        console.log(res);
+        console.log(res.numOfCartItems);
+        this._CartService.cartCount.set(res.numOfCartItems);
+        
+      },
+      error:(error)=>{
+        console.log(error);
+      }
+
+     })
+     }
+  
   
 }
