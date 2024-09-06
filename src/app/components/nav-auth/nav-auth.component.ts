@@ -18,9 +18,6 @@ export class NavAuthComponent {
 
   @ViewChild('navshow') navList!:ElementRef 
 
-  
-
- 
   show(x:number){
     let ele=  this.navList.nativeElement
 

@@ -6,7 +6,7 @@ import { provideRouter, withHashLocation, withViewTransitions } from '@angular/r
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import {  provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { errorsInterceptor } from './core/interceptors/errors.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
