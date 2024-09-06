@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { FlowbiteService } from '../../core/services/flowbite.service';
@@ -11,13 +11,27 @@ import { FlowbiteService } from '../../core/services/flowbite.service';
   styleUrl: './nav-auth.component.scss'
 })
 export class NavAuthComponent {
-  
-  constructor(private _FlowbiteService: FlowbiteService) {}
 
-  ngOnInit(): void {
-    this._FlowbiteService.loadFlowbite(flowbite => {    
-      console.log('Flowbite loaded', flowbite);  
-    });
+
+  private readonly _Renderer2:Renderer2 =inject(Renderer2);
+
+
+  @ViewChild('navshow') navList!:ElementRef 
+
+  
+
+ 
+  show(x:number){
+    let ele=  this.navList.nativeElement
+
+   
+   
+    if (ele.classList.contains('hidden')) {
+      this._Renderer2.removeClass(ele,'hidden')
+    }else{
+      this._Renderer2.addClass(ele,'hidden')
+
+    }
   }
 
 

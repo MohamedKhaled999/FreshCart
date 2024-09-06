@@ -1,3 +1,5 @@
+import { resolve } from 'node:path';
+import { detailsResolver } from './core/guards/details.resolver';
 import { ProductComponent } from './components/product/product.component';
 import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
@@ -82,7 +84,8 @@ export const routes: Routes = [
         path: 'details/:id',
         loadComponent: () =>
           import('./components/details/details.component').then(m => m.DetailsComponent),
-        title: 'details'
+        title: 'details',
+        resolve:{myRes:detailsResolver}
       },
       {
         path: 'allorders',

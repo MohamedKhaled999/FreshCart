@@ -22,40 +22,27 @@ export class DetailsComponent implements OnInit {
   readonly _CartService= inject(CartService)
   private readonly toastr: ToastrService =inject(ToastrService);
 
-  detailsProduct:IProduct|null= null
+  detailsProduct!:IProduct;
 
   @ViewChild('slider') silder!:Swiper
 
- 
   ngOnInit(): void {
     
 
     console.log("detailsProduct",this.detailsProduct);
     
-    this._ActivatedRoute.paramMap.subscribe({next:(prams)=>{
-     let id =prams.get('id');
-     this._ProductsServicec.getSpecificProduct(id!).subscribe({next:(res)=>{
-        console.log(res.data);
-        this.detailsProduct=res.data;
-        setTimeout(() => {
-          if (this.silder) {
-            this.silder?.slideNext();
-          }
-        }, 1000);
-        
-     },
-     error:(err)=>{
-      console.log(err);
+   this._ActivatedRoute.data.subscribe({
+    next:(res:any)=>{
+      console.log(res.myRes.data);
+      this.detailsProduct=res.myRes.data;
+      
     }
-    })
-      
-      
-    },
+    ,
     error:(err)=>{
       console.log(err);
       
     }
-  })
+   })
   }
   getSliderDir() {
 
@@ -84,6 +71,6 @@ export class DetailsComponent implements OnInit {
 
      })
      }
-  
+   
   
 }
