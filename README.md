@@ -2,10 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
 
-👨💻
+#👨💻
 FreshCart is a modern, responsive e-commerce web application designed for a seamless shopping experience. Built with cutting-edge technologies, it provides essential e-commerce functionalities with a clean and user-friendly interface.
 
-🏹 Tech Stack:
+#🏹 Tech Stack:
 ✅Angular17, HTML, TypeScript, SCSS (SASS), Routing 
 ✅ Tailwind CSS for responsiveness and modern design, API Integration
 ✅ngx-toastr for Toast Notifications and SweetAlert for alerts and confirmation popups.
@@ -16,7 +16,7 @@ FreshCart is a modern, responsive e-commerce web application designed for a seam
 ✅ resolve guard to display page ( used in details page) when data returned 
  
 
-🌟Key features of the website include:
+#🌟Key features of the website include:
 📌 Product Listings : Browse a wide variety of products with detailed descriptions, prices, and images.
 📌 Search & Filter : Easily search and filter products.
 📌 Shopping Cart : Add items to your cart and manage quantities effortlessly. 
